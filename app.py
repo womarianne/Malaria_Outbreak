@@ -4,8 +4,6 @@ from sklearn.svm import SVR
 from sklearn.model_selection import train_test_split
 from meteostat import Stations, Daily, Point, Hourly
 from datetime import datetime, timedelta
-import base64
-from googletrans import Translator
 
 
 
@@ -17,22 +15,6 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
-#Background image
-def add_bg_from_local(image_file):
-    with open(image_file, "rb") as image_file:
-        encoded_string = base64.b64encode(image_file.read())
-    st.markdown(
-    f"""
-    <style>
-    .stApp {{
-        background-image: url(data:image/{"png"};base64,{encoded_string.decode()});
-        background-size: cover
-    }}
-    </style>
-    """,
-    unsafe_allow_html=True
-    )
-#add_bg_from_local('2469.png')
 
 #Cities info for automatic prediction
 cities = ['Malanville','Natitingou', 'Kouandé','Parakou', 'Cotonou', 'Abomey-Calavi', 'Porto-Novo', 'Bohicon',
