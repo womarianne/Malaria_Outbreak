@@ -276,6 +276,10 @@ else:
                 st.markdown('Statut: <span style="{}"> Very high</span>'.format("color:red;", word_style),
                             unsafe_allow_html=True)
 
+
+st.sidebar.write("")
+st.sidebar.write("")
+st.sidebar.write("")
 st.sidebar.write(" Copyright © gbaguidi et al,2023 (WASCAL-LOME,CC-DRM). All rights reserved.")
 
 
