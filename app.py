@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 from meteostat import Stations, Daily, Point, Hourly
 from datetime import datetime, timedelta
 import base64
-from googletrans import Translator
+
 
 
 
