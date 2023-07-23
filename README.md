@@ -1,2 +1,3 @@
 # Malaria
-Application streamlit pour prédire l'incidence du paludisme au Bénin.
+Application pour prédire l'incidence du paludisme au Bénin.
+Propulsée par Marianne BALOGOUN
