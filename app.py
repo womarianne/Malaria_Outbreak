@@ -120,7 +120,7 @@ if language == 'Français':
         df = user_input()
         prediction = svr_model.predict(df)
         # Add remaining 0.39318 to the initial prediction
-        prediction *= 1.0039318
+        prediction = prediction * 2.0039318
         st.write("Incidence du Paludisme:", "{:.2f}".format(prediction[0]), "%")
 
         if (prediction[0] >= 0 and prediction[0] < 5):
@@ -130,7 +130,7 @@ if language == 'Français':
             st.markdown('Statut: <span style="{}">Faible</span>'.format("color:green;", word_style),
                                 unsafe_allow_html=True)
         elif (prediction[0] >= 15 and prediction[0] < 30):
-            st.markdown('Statut: <span style="{}">Modéré</span>'.format("color:orange;", word_style),
+            st.markdown('Statut: <span style="{}">Modéré(Dormez sous moustiquaire impregnée, fermez vos porte à partir de 19h)</span>'.format("color:orange;", word_style),
                                 unsafe_allow_html=True)
         elif (prediction[0] >= 30 and prediction[0] < 50):
             st.markdown('Statut: <span style="{}">Elevé</span>'.format("color:pink;", word_style),
