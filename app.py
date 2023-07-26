@@ -4,6 +4,8 @@ from sklearn.svm import SVR
 from sklearn.model_selection import train_test_split
 from meteostat import Stations, Daily, Point, Hourly
 from datetime import datetime, timedelta
+import base64
+
 
 
 
@@ -15,6 +17,22 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
+#Background image
+def add_bg_from_local(image_file):
+    with open(image_file, "rb") as image_file:
+        encoded_string = base64.b64encode(image_file.read())
+    st.markdown(
+    f"""
+    <style>
+    .stApp {{
+        background-image: url(data:image/{"png"};base64,{encoded_string.decode()});
+        background-size: cover
+    }}
+    </style>
+    """,
+    unsafe_allow_html=True
+    )
+#add_bg_from_local('2469.png')
 
 #Cities info for automatic prediction
 cities = ['Malanville','Natitingou', 'Kouandé','Parakou', 'Cotonou', 'Abomey-Calavi', 'Porto-Novo', 'Bohicon',
@@ -92,8 +110,8 @@ if language == 'Français':
     with col1:
         def user_input():
             input_var1 = st.slider('Précipitation', 0, 500, 500)
-            input_var2 = st.slider('Température maximale moyenne', 29, 11, 40)
-            input_var3 = st.slider('Humidité relative maximale', 0, 100, 100)
+            input_var2 = st.slider('Température', 29, 11, 100)
+            input_var3 = st.slider('Humidité', 0, 100, 100)
             data = {'Prec_Average': input_var1,
                     'Average_Temperature_Max': input_var2,
                     'Average_RH_Max': input_var3}
@@ -101,6 +119,8 @@ if language == 'Français':
             return input_data
         df = user_input()
         prediction = svr_model.predict(df)
+        # Add remaining 0.39318 to the initial prediction
+        prediction *= 1.0039318
         st.write("Incidence du Paludisme:", "{:.2f}".format(prediction[0]), "%")
 
         if (prediction[0] >= 0 and prediction[0] < 5):
@@ -148,6 +168,8 @@ if language == 'Français':
         else:
             # st.dataframe()
             auto_prediction = svr_model.predict(auto_df)
+            # Add remaining 0.39318 to the initial prediction
+            auto_prediction *= 1.0039318
             st.write("Incidence  actuelle du paludisme:", "{:.2f}".format(auto_prediction[0]), "%")
             if (auto_prediction[0] >= 0 and auto_prediction[0] < 5):
                 st.markdown('Statut: <span style="{}">Très faible</span>'.format("color:blue;", word_style),
@@ -255,7 +277,15 @@ else:
                             unsafe_allow_html=True)
 
 
-
+st.sidebar.write("")
+st.sidebar.write("")
+st.sidebar.write("")
+st.sidebar.write("")
+st.sidebar.write("")
+st.sidebar.write("")
+st.sidebar.write("")
+st.sidebar.write("")
+st.sidebar.write(" Copyright © gbaguidi et al, 2023 (WASCAL-LOME,CC-DRM). All rights reserved.")
 
 
 
